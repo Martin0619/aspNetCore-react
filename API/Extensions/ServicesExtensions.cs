@@ -9,6 +9,16 @@ namespace API.Extensions
 {
     public static class ServicesExtensions
     {
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", builder =>
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .WithOrigins("http://localhost:3000"));
+            });
+        }
         public static void ConfigureDbContext(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddLogging(builder =>
